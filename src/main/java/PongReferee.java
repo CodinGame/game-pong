@@ -65,8 +65,6 @@ public class PongReferee implements Referee {
 
     private void moveBall() {
         double t = 0;
-        ball.setRotation(ball.getRotation());
-        entityManager.commitEntityState(ball, 0);
         while (t < 1) {
             double timeCollisionTop = ballVY < 0 ? (BALL_RADIUS - ballY) / (double) ballVY : 1;
             double timeCollisionBottom = ballVY > 0 ? (HEIGHT - BALL_RADIUS - ballY) / (double) ballVY : 1;
@@ -109,7 +107,6 @@ public class PongReferee implements Referee {
                 }
             }
 
-            ball.setRotation(ball.getRotation() - delta);
             ball.setX(ballX).setY(ballY);
             entityManager.commitEntityState(ball, t);
         }
