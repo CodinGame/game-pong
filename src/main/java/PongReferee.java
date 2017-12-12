@@ -5,6 +5,7 @@ import com.codingame.gameengine.core.AbstractPlayer;
 import com.codingame.gameengine.core.AbstractPlayer.TimeoutException;
 import com.codingame.gameengine.core.GameManager;
 import com.codingame.gameengine.core.Referee;
+import com.codingame.gameengine.core.Tooltip;
 import com.codingame.gameengine.module.entities.Circle;
 import com.codingame.gameengine.module.entities.EntityManager;
 import com.codingame.gameengine.module.entities.Line;
@@ -93,6 +94,7 @@ public class PongReferee implements Referee {
                 double paddleY = (p.previousY * (1 - t)) + p.y * t;
                 if (ballY > paddleY - PADDLE_HEIGHT / 2 && ballY < paddleY + PADDLE_HEIGHT / 2) {
                     ballVX *= -1;
+                    gameManager.addTooltip(new Tooltip(p.getIndex(), "Ping"));
                 } else {
                     p.lost = true;
                 }
@@ -102,6 +104,7 @@ public class PongReferee implements Referee {
                 double paddleY = (p.previousY * (1 - t)) + p.y * t;
                 if (ballY > paddleY - PADDLE_HEIGHT / 2 && ballY < paddleY + PADDLE_HEIGHT / 2) {
                     ballVX *= -1;
+                    gameManager.addTooltip(new Tooltip(p.getIndex(), "Pong"));
                 } else {
                     p.lost = true;
                 }
