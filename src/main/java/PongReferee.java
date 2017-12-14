@@ -7,7 +7,7 @@ import com.codingame.gameengine.core.GameManager;
 import com.codingame.gameengine.core.Referee;
 import com.codingame.gameengine.core.Tooltip;
 import com.codingame.gameengine.module.entities.Circle;
-import com.codingame.gameengine.module.entities.EntityManager;
+import com.codingame.gameengine.module.entities.GraphicEntityModule;
 import com.codingame.gameengine.module.entities.Line;
 import com.google.inject.Inject;
 
@@ -35,7 +35,7 @@ public class PongReferee implements Referee {
     private static int PADDLE_HEIGHT = 150;
 
     @Inject private GameManager<PongPlayer> gameManager;
-    @Inject private EntityManager entityManager;
+    @Inject private GraphicEntityModule graphicEntityModule;
 
     private int ballX, ballY;
     private int ballVX, ballVY;
@@ -111,12 +111,12 @@ public class PongReferee implements Referee {
             }
 
             ball.setX(ballX).setY(ballY);
-            entityManager.commitEntityState(ball, t);
+            graphicEntityModule.commitEntityState(ball, t);
         }
     }
 
     @Override
-    public Properties init(int playerCount, Properties gameProperties) {
+    public Properties init(Properties gameProperties) {
         gameManager.setFrameDuration(300);
 
         ballX = WIDTH / 2;
@@ -124,12 +124,12 @@ public class PongReferee implements Referee {
         ballVX = 148;
         ballVY = 132;
 
-        entityManager.createSprite().setImage("background").setScale(2);
+        graphicEntityModule.createSprite().setImage("background").setScale(2);
 
         for (PongPlayer p : gameManager.getPlayers()) {
             p.previousY = p.y = HEIGHT / 2;
 
-            p.paddle = entityManager.createLine()
+            p.paddle = graphicEntityModule.createLine()
                     .setLineWidth(PADDLE_WIDTH)
                     .setX(p.getIndex() == 0 ? PADDLE_WIDTH / 2 : WIDTH - PADDLE_WIDTH / 2)
                     .setY(p.y - PADDLE_HEIGHT / 2)
@@ -137,7 +137,7 @@ public class PongReferee implements Referee {
                     .setY2(p.y + PADDLE_HEIGHT / 2);
         }
 
-        ball = entityManager.createCircle()
+        ball = graphicEntityModule.createCircle()
                 .setRadius(BALL_RADIUS)
                 .setFillColor(0xffffff)
                 .setX(ballX)

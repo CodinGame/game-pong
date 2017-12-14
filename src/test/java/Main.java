@@ -9,8 +9,8 @@ public class Main {
         properties.setProperty("seed", "42");
         
         GameRunner gameRunner = new GameRunner(properties);
-        gameRunner.addJavaPlayer(Player1.class);
-        gameRunner.addJavaPlayer(Player2.class);
+        gameRunner.addAgent(Player1.class);
+        gameRunner.addAgent(Player2.class);
 
         // gameRunner.addCommandLinePlayer("python3 /home/user/player.py");
         
