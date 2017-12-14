@@ -1,40 +1,24 @@
+package com.codingame.game;
 import java.util.List;
 import java.util.Properties;
 
 import com.codingame.gameengine.core.AbstractPlayer;
 import com.codingame.gameengine.core.AbstractPlayer.TimeoutException;
+import com.codingame.gameengine.core.AbstractReferee;
 import com.codingame.gameengine.core.GameManager;
-import com.codingame.gameengine.core.Referee;
 import com.codingame.gameengine.core.Tooltip;
 import com.codingame.gameengine.module.entities.Circle;
 import com.codingame.gameengine.module.entities.GraphicEntityModule;
-import com.codingame.gameengine.module.entities.Line;
 import com.google.inject.Inject;
 
-class PongPlayer extends AbstractPlayer {
-    int y;
-    Line paddle;
-    boolean lost;
-    public int previousY;
-
-    int getAction() throws NumberFormatException, TimeoutException {
-        return Integer.parseInt(this.getOutputs().get(0));
-    }
-
-    @Override
-    public int getExpectedOutputLines() {
-        return 1;
-    }
-}
-
-public class PongReferee implements Referee {
+public class Referee extends AbstractReferee {
     private static int WIDTH = 1920;
     private static int HEIGHT = 1080;
     private static int BALL_RADIUS = 20;
     private static int PADDLE_WIDTH = 15;
     private static int PADDLE_HEIGHT = 150;
 
-    @Inject private GameManager<PongPlayer> gameManager;
+    @Inject private GameManager<Player> gameManager;
     @Inject private GraphicEntityModule graphicEntityModule;
 
     private int ballX, ballY;
@@ -46,8 +30,8 @@ public class PongReferee implements Referee {
     }
 
     private void sendPlayerInputs() {
-        List<PongPlayer> allPlayers = gameManager.getPlayers();
-        for (PongPlayer p : gameManager.getActivePlayers()) {
+        List<Player> allPlayers = gameManager.getPlayers();
+        for (Player p : gameManager.getActivePlayers()) {
             p.sendInputLine(String.valueOf(p.y));
             p.sendInputLine(String.valueOf(allPlayers.get((p.getIndex() + 1) % 2).y));
             p.sendInputLine(String.format("%d %d", ballX, ballY));
@@ -90,7 +74,7 @@ public class PongReferee implements Referee {
             }
 
             if (ballVX < 0 && ballX <= BALL_RADIUS + PADDLE_WIDTH) {
-                PongPlayer p = gameManager.getPlayer(0);
+                Player p = gameManager.getPlayer(0);
                 double paddleY = (p.previousY * (1 - t)) + p.y * t;
                 if (ballY > paddleY - PADDLE_HEIGHT / 2 && ballY < paddleY + PADDLE_HEIGHT / 2) {
                     ballVX *= -1;
@@ -100,7 +84,7 @@ public class PongReferee implements Referee {
                 }
             }
             if (ballVX > 0 && ballX >= WIDTH - BALL_RADIUS - PADDLE_WIDTH) {
-                PongPlayer p = gameManager.getPlayer(1);
+                Player p = gameManager.getPlayer(1);
                 double paddleY = (p.previousY * (1 - t)) + p.y * t;
                 if (ballY > paddleY - PADDLE_HEIGHT / 2 && ballY < paddleY + PADDLE_HEIGHT / 2) {
                     ballVX *= -1;
@@ -126,7 +110,7 @@ public class PongReferee implements Referee {
 
         graphicEntityModule.createSprite().setImage("background").setScale(2);
 
-        for (PongPlayer p : gameManager.getPlayers()) {
+        for (Player p : gameManager.getPlayers()) {
             p.previousY = p.y = HEIGHT / 2;
 
             p.paddle = graphicEntityModule.createLine()
@@ -152,7 +136,7 @@ public class PongReferee implements Referee {
         sendPlayerInputs();
 
         // Update new positions
-        for (PongPlayer p : gameManager.getActivePlayers()) {
+        for (Player p : gameManager.getActivePlayers()) {
             int deltaMove;
             try {
                 deltaMove = p.getAction() - p.y;

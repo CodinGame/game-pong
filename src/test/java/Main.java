@@ -1,10 +1,9 @@
-import java.net.URISyntaxException;
 import java.util.Properties;
 
 import com.codingame.gameengine.runner.GameRunner;
 
 public class Main {
-    public static void main(String[] args) throws URISyntaxException {
+    public static void main(String[] args) {
         Properties properties = new Properties();
         properties.setProperty("seed", "42");
         
