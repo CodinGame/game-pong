@@ -1,14 +1,8 @@
 import { GraphicEntityModule } from './entity-module/GraphicEntityModule.js';
 
-export const assets = {
-  images: {
-    background: '/assets/Background.jpg'
-  }
-}
-
 export const demo = {
   playerCount: 2,
-  logo: '/assets/logo.png',
+  logo: 'logo.png',
   overlayAlpha: 0.2,
   agents: [{
     index: 0,
@@ -32,7 +26,7 @@ export const demo = {
     }
   }],
   frames: [
-    "KEY_FRAME 0\n{\"global\":{\"entitymodule\":{\"width\":1920,\"height\":1080}},\"frame\":{\"duration\":300,\"entitymodule\":\"CREATE 1 SPRITE\\nCREATE 2 LINE\\nCREATE 3 LINE\\nCREATE 4 CIRCLE\\nUPDATE 2 1 x 7 y 465 y2 615 x2 7 lineWidth 15\\nUPDATE 1 1 scaleX 2.0 image background scaleY 2.0\\nUPDATE 3 1 x 1913 y 465 y2 615 x2 1913 lineWidth 15\\nUPDATE 4 1 fillColor 16777215 x 960 y 540 radius 20\\n\"}}\n",
+    "KEY_FRAME 0\n{\"global\":{\"entitymodule\":{\"width\":1920,\"height\":1080}},\"frame\":{\"duration\":300,\"entitymodule\":\"CREATE 1 SPRITE\\nCREATE 2 LINE\\nCREATE 3 LINE\\nCREATE 4 CIRCLE\\nUPDATE 2 1 x 7 y 465 y2 615 x2 7 lineWidth 15\\nUPDATE 1 1 scaleX 2.0 image Background.jpg scaleY 2.0\\nUPDATE 3 1 x 1913 y 465 y2 615 x2 1913 lineWidth 15\\nUPDATE 4 1 fillColor 16777215 x 960 y 540 radius 20\\n\"}}\n",
     "INTERMEDIATE_FRAME 1\n",
     "KEY_FRAME 2\n{\"entitymodule\":\"UPDATE 2 1 y 585 y2 735\\nUPDATE 3 1 y 585 y2 735\\nUPDATE 4 1 x 1108 y 672\\n\"}\n",
     "INTERMEDIATE_FRAME 3\n",

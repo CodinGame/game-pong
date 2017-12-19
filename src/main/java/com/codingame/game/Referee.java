@@ -95,7 +95,7 @@ public class Referee extends AbstractReferee {
             }
 
             ball.setX(ballX).setY(ballY);
-            graphicEntityModule.commitEntityState(ball, t);
+            graphicEntityModule.commitEntityState(t, ball);
         }
     }
 
@@ -108,7 +108,7 @@ public class Referee extends AbstractReferee {
         ballVX = 148;
         ballVY = 132;
 
-        graphicEntityModule.createSprite().setImage("background").setScale(2);
+        graphicEntityModule.createSprite().setImage("Background.jpg").setAnchor(0);
 
         for (Player p : gameManager.getPlayers()) {
             p.previousY = p.y = HEIGHT / 2;
