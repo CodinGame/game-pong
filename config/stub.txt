@@ -1,0 +1,9 @@
+gameloop
+read y:int
+read oppY:int
+read ballX:int
+read ballY:int
+read speedX:int
+read speedY:int
+
+write 0
