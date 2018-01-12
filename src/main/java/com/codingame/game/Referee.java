@@ -1,4 +1,5 @@
 package com.codingame.game;
+
 import java.util.List;
 import java.util.Properties;
 
@@ -20,6 +21,7 @@ public class Referee extends AbstractReferee {
 
     @Inject private GameManager<Player> gameManager;
     @Inject private GraphicEntityModule graphicEntityModule;
+    @Inject private AnimatedEventModule animatedEventModule;
 
     private int ballX, ballY;
     private int ballVX, ballVY;
@@ -79,6 +81,12 @@ public class Referee extends AbstractReferee {
                 if (ballY > paddleY - PADDLE_HEIGHT / 2 && ballY < paddleY + PADDLE_HEIGHT / 2) {
                     ballVX *= -1;
                     gameManager.addTooltip(new Tooltip(p.getIndex(), "Ping"));
+                    
+                    ViewerEvent ev = animatedEventModule.createAnimationEvent("Ping", t);
+                    ev.params.put("player", 0);
+                    ev.params.put("x", ballX);
+                    ev.params.put("y", ballY);
+
                 } else {
                     p.lost = true;
                 }
@@ -89,6 +97,11 @@ public class Referee extends AbstractReferee {
                 if (ballY > paddleY - PADDLE_HEIGHT / 2 && ballY < paddleY + PADDLE_HEIGHT / 2) {
                     ballVX *= -1;
                     gameManager.addTooltip(new Tooltip(p.getIndex(), "Pong"));
+                    
+                    ViewerEvent ev = animatedEventModule.createAnimationEvent("Ping", t);
+                    ev.params.put("player", 1);
+                    ev.params.put("x", ballX);
+                    ev.params.put("y", ballY);
                 } else {
                     p.lost = true;
                 }
