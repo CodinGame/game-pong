@@ -1,4 +1,5 @@
 package com.codingame.game;
+
 import java.util.List;
 import java.util.Properties;
 
@@ -9,6 +10,7 @@ import com.codingame.gameengine.core.GameManager;
 import com.codingame.gameengine.core.Tooltip;
 import com.codingame.gameengine.module.entities.Circle;
 import com.codingame.gameengine.module.entities.GraphicEntityModule;
+import com.codingame.gameengine.module.entities.SpriteAnimation;
 import com.google.inject.Inject;
 
 public class Referee extends AbstractReferee {
@@ -20,6 +22,7 @@ public class Referee extends AbstractReferee {
 
     @Inject private GameManager<Player> gameManager;
     @Inject private GraphicEntityModule graphicEntityModule;
+    @Inject private AnimatedEventModule animatedEventModule;
 
     private int ballX, ballY;
     private int ballVX, ballVY;
@@ -78,7 +81,14 @@ public class Referee extends AbstractReferee {
                 double paddleY = (p.previousY * (1 - t)) + p.y * t;
                 if (ballY > paddleY - PADDLE_HEIGHT / 2 && ballY < paddleY + PADDLE_HEIGHT / 2) {
                     ballVX *= -1;
+
                     gameManager.addTooltip(new Tooltip(p.getIndex(), "Ping"));
+                    
+                    ViewerEvent ev = animatedEventModule.createAnimationEvent("Ping", t);
+                    ev.params.put("player", 0);
+                    ev.params.put("x", ballX);
+                    ev.params.put("y", ballY);
+
                 } else {
                     p.lost = true;
                 }
@@ -89,6 +99,11 @@ public class Referee extends AbstractReferee {
                 if (ballY > paddleY - PADDLE_HEIGHT / 2 && ballY < paddleY + PADDLE_HEIGHT / 2) {
                     ballVX *= -1;
                     gameManager.addTooltip(new Tooltip(p.getIndex(), "Pong"));
+
+                    ViewerEvent ev = animatedEventModule.createAnimationEvent("Ping", t);
+                    ev.params.put("player", 1);
+                    ev.params.put("x", ballX);
+                    ev.params.put("y", ballY);
                 } else {
                     p.lost = true;
                 }
@@ -108,6 +123,8 @@ public class Referee extends AbstractReferee {
         ballVX = 148;
         ballVY = 132;
 
+        
+        
         graphicEntityModule.createSprite().setImage("Background.jpg").setAnchor(0);
 
         for (Player p : gameManager.getPlayers()) {
@@ -126,7 +143,7 @@ public class Referee extends AbstractReferee {
                 .setFillColor(0xffffff)
                 .setX(ballX)
                 .setY(ballY);
-
+        
         return gameProperties;
     }
 
