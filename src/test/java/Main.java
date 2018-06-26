@@ -10,8 +10,8 @@ public class Main {
         MultiplayerGameRunner gameRunner = new MultiplayerGameRunner();
         gameRunner.setGameParameters(properties);
         
-        gameRunner.addAgent(Player1.class);
-        gameRunner.addAgent(Player2.class);
+        gameRunner.addAgent(Agent1.class);
+        gameRunner.addAgent(Agent2.class);
 
         // gameRunner.addAgent("python3 /home/user/player.py");
         

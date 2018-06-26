@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Player1 {
+public class Agent1 {
     private static final int WIDTH = 1920;
     private static final int HEIGHT = 1080;
     private static final int BALL_RADIUS = 20;
