@@ -1,16 +1,13 @@
 package com.codingame.game;
 
 import java.util.List;
-import java.util.Properties;
 
-import com.codingame.gameengine.core.AbstractPlayer;
 import com.codingame.gameengine.core.AbstractPlayer.TimeoutException;
 import com.codingame.gameengine.core.AbstractReferee;
-import com.codingame.gameengine.core.GameManager;
+import com.codingame.gameengine.core.MultiplayerGameManager;
 import com.codingame.gameengine.core.Tooltip;
 import com.codingame.gameengine.module.entities.Circle;
 import com.codingame.gameengine.module.entities.GraphicEntityModule;
-import com.codingame.gameengine.module.entities.SpriteAnimation;
 import com.google.inject.Inject;
 
 public class Referee extends AbstractReferee {
@@ -20,7 +17,7 @@ public class Referee extends AbstractReferee {
     private static int PADDLE_WIDTH = 15;
     private static int PADDLE_HEIGHT = 150;
 
-    @Inject private GameManager<Player> gameManager;
+    @Inject private MultiplayerGameManager<Player> gameManager;
     @Inject private GraphicEntityModule graphicEntityModule;
     @Inject private AnimatedEventModule animatedEventModule;
 
@@ -115,7 +112,7 @@ public class Referee extends AbstractReferee {
     }
 
     @Override
-    public Properties init(Properties gameProperties) {
+    public void init() {
         gameManager.setFrameDuration(300);
 
         ballX = WIDTH / 2;
@@ -135,7 +132,8 @@ public class Referee extends AbstractReferee {
                     .setX(p.getIndex() == 0 ? PADDLE_WIDTH / 2 : WIDTH - PADDLE_WIDTH / 2)
                     .setY(p.y - PADDLE_HEIGHT / 2)
                     .setX2(p.getIndex() == 0 ? PADDLE_WIDTH / 2 : WIDTH - PADDLE_WIDTH / 2)
-                    .setY2(p.y + PADDLE_HEIGHT / 2);
+                    .setY2(p.y + PADDLE_HEIGHT / 2)
+                    .setLineColor(0xffffff);
         }
 
         ball = graphicEntityModule.createCircle()
@@ -143,8 +141,6 @@ public class Referee extends AbstractReferee {
                 .setFillColor(0xffffff)
                 .setX(ballX)
                 .setY(ballY);
-        
-        return gameProperties;
     }
 
     @Override
@@ -185,7 +181,7 @@ public class Referee extends AbstractReferee {
 
     @Override
     public void onEnd() {
-        for (AbstractPlayer p : gameManager.getPlayers()) {
+        for (Player p : gameManager.getPlayers()) {
             p.setScore(p.isActive() ? 1 : 0);
         }
     }

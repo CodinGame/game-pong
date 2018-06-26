@@ -35,7 +35,6 @@ public class AnimatedEventModule implements Module {
 
     @Override
     public void onAfterOnEnd() {
-        sendFrameData();
     }
 
     public ViewerEvent createAnimationEvent(String id, double t) {

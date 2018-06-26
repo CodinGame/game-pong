@@ -1,13 +1,15 @@
 import java.util.Properties;
 
-import com.codingame.gameengine.runner.GameRunner;
+import com.codingame.gameengine.runner.MultiplayerGameRunner;
 
 public class Main {
     public static void main(String[] args) {
         Properties properties = new Properties();
         properties.setProperty("seed", "42");
         
-        GameRunner gameRunner = new GameRunner(properties);
+        MultiplayerGameRunner gameRunner = new MultiplayerGameRunner();
+        gameRunner.setGameParameters(properties);
+        
         gameRunner.addAgent(Player1.class);
         gameRunner.addAgent(Player2.class);
 
