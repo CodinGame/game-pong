@@ -1,11 +1,68 @@
 <div id="statement_back" class="statement_back" style="display: none"></div>
 <div class="statement-body">
-	<!-- GOAL -->
-	<div class="statement-section statement-goal">
-		<h2>
-			<span class="icon icon-goal">&nbsp;</span> <span>The Goal</span>
-		</h2>
-		<div class="statement-goal-content">Send the ball behind the bar
-			of your opponent</div>
-	</div>
+  <!-- GOAL -->
+  <div class="statement-section statement-goal">
+    <h2>
+      <span class="icon icon-goal">&nbsp;</span> <span>The Goal</span>
+    </h2>
+    <div class="statement-goal-content">Send the ball behind the your opponent's paddle.</div>
+  </div>
+
+  <!-- RULES -->
+  <div class="statement-section statement-rules">
+      <h1>
+          <span class="icon icon-rules">&nbsp;</span>
+          <span>Rules</span>
+      </h1>
+      <div class="statement-rules-content">
+          <p>The game is played on a map <const>1920</const> units wide and <const>1080</const> units high.</p>
+
+          <p>The ball has a radius of <const>20</const> units.</p>
+
+          <p>The paddles are <const>15</const> units wide and <const>150</const> units high.</p>
+
+          <p>The paddles can move up to <const>120</const> units per turn, vertically.</p>
+          
+          <p>The ball's starting position is <const>x=960</const>, <const>y=540</const>.</p>
+
+          <p>The ball's starting velocity is <const>vx=148</const>, <const>vy=132</const>.</p>
+      </div>
+  </div>
+
+  <!-- PROTOCOL -->
+  <div class="statement-section statement-protocol">
+    <h2>
+      <span class="icon icon-protocol">&nbsp;</span>
+      <span>Game Input</span>
+    </h2>
+    <!-- Protocol block -->
+    <div class="blk">
+      <div class="title">Input for one game turn</div>
+      <div class="text"><span class="statement-lineno">Line 1:</span> 1 integer <var>y</var> for the current vertical position of your paddle. <br>
+        <span class="statement-lineno">Line 2:</span> 1 integer <var>oppY</var> for the current vertical position of your opponent's paddle.
+        <br>
+        <span class="statement-lineno">Line 3:</span> 1 integer <var>ballX</var> for the current x coordinate of the ball.
+        <br>
+        <span class="statement-lineno">Line 4:</span> 1 integer <var>ballY</var> for the current y coordinate of the ball.
+        <br>
+        <span class="statement-lineno">Line 5:</span> 1 integer <var>speedX</var> for the current vx speed of the ball.
+        <br>
+        <span class="statement-lineno">Line 6:</span> 1 integer <var>speedY</var> for the current vy speed of the ball.
+        <br>
+      </div>
+    </div>
+
+    <!-- Protocol block -->
+    <div class="blk">
+      <div class="title">Output for one game turn</div>
+      <div class="text"><span class="statement-lineno">Line 1:</span> 1 integer for the destination <var>y</var> position of your paddle.</div>
+    </div>
+
+    <!-- Protocol block -->
+    <div class="blk">
+      <div class="title">Constraints</div>
+      <div class="text">Response time for first turn ≤ 1000ms <br>
+        Response time for one turn ≤ 100ms</div>
+    </div>
+  </div>
 </div>

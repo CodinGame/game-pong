@@ -1,4 +1,4 @@
-package com.codingame.game;
+package com.codingame.view;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 public class ViewerEvent {
         private double t;
         private String id;
-        Map<String, Object> params;
+        public Map<String, Object> params;
 
         public ViewerEvent(String id, double t) {
             this.t = t;

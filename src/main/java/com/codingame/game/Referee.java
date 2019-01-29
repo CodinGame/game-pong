@@ -8,6 +8,8 @@ import com.codingame.gameengine.core.MultiplayerGameManager;
 import com.codingame.gameengine.core.Tooltip;
 import com.codingame.gameengine.module.entities.Circle;
 import com.codingame.gameengine.module.entities.GraphicEntityModule;
+import com.codingame.view.AnimatedEventModule;
+import com.codingame.view.ViewerEvent;
 import com.google.inject.Inject;
 
 public class Referee extends AbstractReferee {
