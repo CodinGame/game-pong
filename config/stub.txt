@@ -1,9 +1,10 @@
 gameloop
 read y:int
 read oppY:int
-read ballX:int
-read ballY:int
-read speedX:int
-read speedY:int
+read ballX:int ballY:int
+read speedX:int speedY:int
 
 write 0
+
+OUTPUT
+The destination y coordinate of your paddle
